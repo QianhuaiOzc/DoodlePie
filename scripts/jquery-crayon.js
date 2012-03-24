@@ -1,26 +1,27 @@
 (function ($) {
 
     var colorList = [
+        "f1009c",
+        "fc0400",
+        "ff852e",
+        "fec900",
+        "d1f800",
+        "47d329",
+        "29d4a3",
+        "29b0d2",
+        "2859cf",
+        "986ad7",
+        "c7bbbb",
         "000000",
-        "111111",
-        "222222",
-        "333333",
-        "444444",
-        "555555",
-        "666666",
-        "777777",
-        "888888",
-        "999999",
-        "AAAAAA",
-        "BBBBBB"
+        "ffffff"
     ];
 
-    var penFirstTop = 10;
-    var penHeight = 20;
-    var penWidth = 100;
-    var penSpacing = 10;
-    var penUnselectedLeft = -50;
-    var penSelectedLeft = -20;
+    var penFirstTop = 8;
+    var penHeight = 49;
+    var penWidth = 238;
+    var penSpacing = 8;
+    var penUnselectedLeft = -138;
+    var penSelectedLeft = -100;
 
     $.crayon = function (options) {
         var main = options.main;
@@ -48,7 +49,8 @@
             divPen.attr("color", color);
             divPen.css({
                 "position": "absolute",
-                "background-color": "#" + color,
+                // "background-color": "#" + color,
+                "background-image": "url(images/crayon-pens/" + i + "_" + color + ".png)",
                 "top": penFirstTop + i * ( penHeight + penSpacing),
                 "height": penHeight,
                 "width": penWidth,

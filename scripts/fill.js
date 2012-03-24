@@ -20,8 +20,8 @@
             "height": 600
         });
 
-        var crayonTextureImage = new Image();
-        crayonTextureImage.src = "images/crayon-texture.png"
+        var bgImage = new Image();
+        bgImage.src = "images/fill-background.png"
 
         var canvas = mainCanvas.get(0);
         var context = canvas.getContext("2d");
@@ -103,21 +103,22 @@
                 context.closePath();
             }
 
-            context.globalAlpha = 0.5;
-            context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
+            context.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height);
         }
 
         var button = $('<input type="button" value="Save" />').appendTo(main);
         button.click(function () {
             saveImage();
-        })
+        });
+
+        window.setTimeout(repaint, 100);
     }
 
     function dispose() {
         main = null;
     }
 
-    modules["part2"] = {
+    modules["fill"] = {
         init: init,
         dispose: dispose
     }
