@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Doodle Pie</title>
+
+<script src="scripts/jquery-1.5.1.min.js"></script>
+<script src="scripts/jcanvas.min.js"></script>
+<script src="scripts/game.js"></script>
+
+<style>
+
+#main {
+    border: 1px solid black;
+    margin-top: -384px;
+    margin-left: -512px;
+    width: 1024px;
+    height: 768px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+/*
+#mainCanvas {
+    position: relative;
+    border: 1px solid red;
+    width: 800px;
+    height: 600px;
+}
+*/
+
+</style>
+
+<script>
+
+var modules = { };
+
+$(document).ready(function () {
+    modules["part1"].init(main);
+});
+
+</script>
+
+</head>
+<body>
+    <div id="main"></div>
+
+    <script src="scripts/part1.js"></script>
+    <script src="scripts/part2.js"></script>
+    <script src="scripts/part3.js"></script>
+</body>
+</html>
