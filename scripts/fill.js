@@ -1,6 +1,7 @@
 (function () {
 
     var main;
+    var save;
 
     function init() {
         main = $("#main");
@@ -62,6 +63,7 @@
             reset: reset
         });
 
+        // collect pathes
         mainCanvas.mousedown(function (ev) {
             drawing = true;
 
@@ -94,12 +96,20 @@
             repaint();
         });
 
-        var saveImage = function () {
-            var dataUrl = canvas.toDataURL("image/png");
-            window.open(dataUrl);
+        // save
+        save = $("#save");
+        save.live("click", function () {
             game.fillFinished();
-        }
 
+            try {
+                var dataUrl = canvas.toDataURL("image/png");
+                window.open(dataUrl);
+            } catch (ex) {
+                console.log(ex);
+            }
+        });
+
+        // repaint
         var repaint = function () {
 
             context.fillStyle = '#ffffff'; // Work around for Chrome
@@ -126,16 +136,14 @@
             context.drawImage(bgImage, 0, 0, bgImage.width, bgImage.height);
         }
 
-        var button = $('<input type="button" value="Save" />').appendTo(main);
-        button.click(function () {
-            saveImage();
-        });
-
         window.setTimeout(repaint, 100);
     }
 
     function dispose() {
         main = null;
+
+        save.die();
+        save = null;
     }
 
     modules["fill"] = {
