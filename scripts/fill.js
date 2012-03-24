@@ -33,6 +33,19 @@
         var pathes = [];
         var currPath;
 
+        var undo = function () {
+            if (pathes.length > 0) {
+                pathes.pop();
+            }
+
+            repaint();
+        }
+
+        var reset = function () {
+            pathes.length = 0;
+            repaint();
+        } 
+
         var sizeSelected = function (size) {
             currSize = size;
         };
@@ -44,7 +57,9 @@
         $.crayon({
             main: main,
             colorSelected: colorSelected,
-            sizeSelected: sizeSelected
+            sizeSelected: sizeSelected,
+            undo: undo,
+            reset: reset
         });
 
         mainCanvas.mousedown(function (ev) {

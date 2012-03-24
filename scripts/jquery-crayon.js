@@ -75,6 +75,32 @@
 
         selectSize(brushSizes[0]);
 
+        // undo
+        var divUndo = $("<div></div>").appendTo(main);
+        divUndo.css({
+            position: "absolute",
+            width: 50,
+            height: 50,
+            border: "1px solid red",
+            top: 700,
+            left: 220
+        });
+
+        divUndo.click(options.undo);
+
+        // reset
+        var divReset = $("<div></div>").appendTo(main);
+        divReset.css({
+            position: "absolute",
+            width: 50,
+            height: 50,
+            border: "1px solid red",
+            top: 700,
+            left: 290
+        });
+
+        divReset.click(options.reset);
+
         // pens
         var divPenList = [];
         var selectedDivPen;
