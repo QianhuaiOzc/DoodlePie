@@ -34,10 +34,21 @@
 
 <script>
 
+var game = {
+    load: function (name) {
+        if (this._currModule) {
+            this._currModule.dispose();
+        }
+
+        this._currModule = modules[name]
+        this._currModule.init();
+    }
+}
+
 var modules = { };
 
 $(document).ready(function () {
-    modules["part1"].init(main);
+    game.load("part1");
 });
 
 </script>
