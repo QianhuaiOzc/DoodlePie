@@ -16,16 +16,66 @@
         "ffffff"
     ];
 
-    var penFirstTop = 8;
+    var penFirstTop = 4;
     var penHeight = 49;
     var penWidth = 238;
-    var penSpacing = 8;
+    var penSpacing = 4;
     var penUnselectedLeft = -138;
     var penSelectedLeft = -100;
+
+    var brushTop = 15;
+    var brushFirstLeft = 60;
+    var brushHeight = 30;
+    var brushWidth = 30;
+    var brushSpacing = 15;
 
     $.crayon = function (options) {
         var main = options.main;
 
+        // brush sizes
+        var divBrushSize = $("<div> <div></div> <div></div> <div></div> </div>").appendTo(main);
+        divBrushSize.css({
+            position: "absolute",
+            width: 222,
+            height: 75,
+            left: 0,
+            top: 690,
+        });
+
+        var brushSizes = [
+            { name: "l", value: 20 },
+            { name: "m", value: 10 },
+            { name: "s", value: 5 }
+        ];
+
+        var selectSize = function (size) {
+            divBrushSize.css({
+                "background-image": "url(images/brush-" + size.name + ".png)"
+            });
+
+            options.sizeSelected(size.value);
+        };
+
+        divBrushSize.children().each(function (index) {
+            $(this).css({
+                position: "absolute",
+                // border: "1px solid red",
+                width: brushWidth,
+                height: brushHeight,
+                top: brushTop,
+                left: brushFirstLeft + index * (brushWidth + brushSpacing)
+            });
+
+            $(this).click((function (size) {
+                return function () {
+                    selectSize(size);
+                };
+            })(brushSizes[index]));
+        })
+
+        selectSize(brushSizes[0]);
+
+        // pens
         var divPenList = [];
         var selectedDivPen;
 

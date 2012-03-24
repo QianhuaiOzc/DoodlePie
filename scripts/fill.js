@@ -33,13 +33,18 @@
         var pathes = [];
         var currPath;
 
+        var sizeSelected = function (size) {
+            currSize = size;
+        };
+
         var colorSelected = function (color) {
             currColor = color;
-        }
+        };
 
         $.crayon({
             main: main,
-            colorSelected: colorSelected
+            colorSelected: colorSelected,
+            sizeSelected: sizeSelected
         });
 
         mainCanvas.mousedown(function (ev) {
