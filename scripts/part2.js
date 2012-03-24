@@ -35,6 +35,7 @@
         var currPath;
 
         var undo = function () {
+            debugger;
             if (pathes.length > 0) {
                 pathes.pop();
             }
@@ -132,6 +133,8 @@
 
             context.globalAlpha = 0.5;
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
+            
+            context.globalAlpha = 1;
         }
     }
 
