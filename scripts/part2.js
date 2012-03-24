@@ -21,6 +21,9 @@
             "height": 600
         });
 
+        var crayonTextureImage = new Image();
+        crayonTextureImage.src = "images/crayon-texture.png"
+
         var context = mainCanvas.get(0).getContext("2d");
 
         var currColor;
@@ -93,6 +96,11 @@
                 context.stroke();
                 context.closePath();
             }
+
+            context.globalAlpha = 0.4;
+            context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
+
+            context.globalAlpha = 1;
         }
     }
 
