@@ -27,19 +27,39 @@
         var context = canvas.getContext("2d");
 
         var currColor;
-        var currSize = 10;
+        var currSize;
         var drawing = false;
 
         var pathes = [];
         var currPath;
 
+        var undo = function () {
+            if (pathes.length > 0) {
+                pathes.pop();
+            }
+
+            repaint();
+        }
+
+        var reset = function () {
+            pathes.length = 0;
+            repaint();
+        } 
+
+        var sizeSelected = function (size) {
+            currSize = size;
+        };
+
         var colorSelected = function (color) {
             currColor = color;
-        }
+        };
 
         $.crayon({
             main: main,
-            colorSelected: colorSelected
+            colorSelected: colorSelected,
+            sizeSelected: sizeSelected,
+            undo: undo,
+            reset: reset
         });
 
         mainCanvas.mousedown(function (ev) {
