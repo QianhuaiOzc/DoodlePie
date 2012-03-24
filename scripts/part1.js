@@ -62,10 +62,18 @@
 
         mainCanvas.mouseup(function(e) {
             paint = false;
+            var showImg = "images/" + curShape + "/" + Math.ceil(Math.random() * 3);
+            var showImgColor = showImg + "-color.png";
+            var img = new Image();
+            img.src = showImgColor;
+            setTimeout(function() {
+                clearCanvas();
+                context.drawImage(img, 0, 0);
+            }, 2000);
             setTimeout(function() {
                 game.shapeUsed();
-                game.loadModule('part2', curShape);
-            }, 2000);
+                game.loadModule('part2', showImg+".png");
+            }, 6000);
         });
 
         mainCanvas.mousemove(function(e) {

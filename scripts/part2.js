@@ -3,9 +3,16 @@
     var main;
     var save;
 
+    var stampsList = [ "ball", "flower", "heart", "music", "star" ];
+
     function init() {
         main = $("#main");
         main.empty();
+
+        var showImg = arguments[0];
+
+        var strokeImg = new Image();
+        strokeImg.src = showImg;
 
         // canvas
         var mainCanvas = $("<canvas></canvas>").appendTo(main);
@@ -35,7 +42,6 @@
         var currPath;
 
         var undo = function () {
-            debugger;
             if (pathes.length > 0) {
                 pathes.pop();
             }
@@ -132,6 +138,7 @@
             }
 
             context.globalAlpha = 0.5;
+            context.drawImage(strokeImg, 0, 0);
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
             
             context.globalAlpha = 1;
