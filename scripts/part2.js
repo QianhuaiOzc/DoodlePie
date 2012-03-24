@@ -1,14 +1,13 @@
 (function () {
 
     var main;
-    var mainCanvas;
 
     function init() {
         main = $("#main");
         main.empty();
 
         // canvas
-        mainCanvas = $("<canvas></canvas>").appendTo(main);
+        var mainCanvas = $("<canvas></canvas>").appendTo(main);
         mainCanvas.css({
             position: "absolute",
             border: "1px solid red",
@@ -24,10 +23,11 @@
         var crayonTextureImage = new Image();
         crayonTextureImage.src = "images/crayon-texture.png"
 
-        var context = mainCanvas.get(0).getContext("2d");
+        var canvas = mainCanvas.get(0);
+        var context = canvas.getContext("2d");
 
         var currColor;
-        var currSize = 5;
+        var currSize = 10;
         var drawing = false;
 
         var pathes = [];
@@ -74,10 +74,16 @@
             repaint();
         });
 
+        var saveImage = function () {
+            var dataUrl = canvas.toDataURL("image/png");
+            window.open(dataUrl);
+            game.fillFinished();
+        }
+
         var repaint = function () {
 
             context.fillStyle = '#ffffff'; // Work around for Chrome
-            context.fillRect(0, 0, mainCanvas.attr("width"), mainCanvas.attr("height")); // Fill in the canvas with white
+            context.fillRect(0, 0, canvas.width, canvas.height); // Fill in the canvas with white
 
             for (var i = 0; i < pathes.length; i++) {
                 var path = pathes[i];
@@ -97,16 +103,18 @@
                 context.closePath();
             }
 
-            context.globalAlpha = 0.4;
+            context.globalAlpha = 0.5;
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
-
-            context.globalAlpha = 1;
         }
+
+        var button = $('<input type="button" value="Save" />').appendTo(main);
+        button.click(function () {
+            saveImage();
+        })
     }
 
     function dispose() {
         main = null;
-        mainCanvas = null;
     }
 
     modules["part2"] = {
