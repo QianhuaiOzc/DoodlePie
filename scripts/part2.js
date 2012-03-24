@@ -1,6 +1,7 @@
 (function () {
 
     var main;
+    var save;
 
     function init() {
         main = $("#main");
@@ -94,11 +95,16 @@
             repaint();
         });
 
-        var saveImage = function () {
-            var dataUrl = canvas.toDataURL("image/png");
-            window.open(dataUrl);
+        save.live("click", function () {
             game.fillFinished();
-        }
+
+            try {
+                var dataUrl = canvas.toDataURL("image/png");
+                window.open(dataUrl);
+            } catch (ex) {
+                console.log(ex);
+            }
+        });
 
         var repaint = function () {
 
@@ -126,15 +132,13 @@
             context.globalAlpha = 0.5;
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
         }
-
-        var button = $('<input type="button" value="Save" />').appendTo(main);
-        button.click(function () {
-            saveImage();
-        })
     }
 
     function dispose() {
         main = null;
+
+        save.die();
+        save;
     }
 
     modules["part2"] = {
