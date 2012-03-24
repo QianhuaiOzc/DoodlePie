@@ -10,9 +10,9 @@
         var mainCanvas = $("<canvas></canvas>").appendTo(main);
         mainCanvas.css({
             position: "absolute",
-            border: "1px solid red",
-            left: 200,
-            top: 20
+            // border: "1px solid red",
+            left: 132,
+            top: 120
         });
 
         mainCanvas.attr({
