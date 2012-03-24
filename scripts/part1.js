@@ -7,7 +7,7 @@
     var startX;
     var startY;
     var curColor;
-    var curShape = 'rectangle';
+    var curShape;
     var curSize;
     var crayonTextureImage = new Image();
     crayonTextureImage.src = "images/crayon-texture.png"
@@ -15,10 +15,10 @@
     // shape list
     var shapeList = [ 'rectangle', 'triangle', 'round' ]; 
     var shapeTop = 0;
-    var shapeFirstLeft = 450;
+    var shapeFirstLeft = 320;
     var shapeSpacing = 50;
-    var shapeHeight = 100;
-    var shapeWidth = 100;
+    var shapeHeight = 117;
+    var shapeWidth = 117;
 
     function init() {
         main = $("#main");
@@ -64,7 +64,7 @@
             paint = false;
             setTimeout(function() {
                 game.shapeUsed();
-                game.loadModule('part2');
+                game.loadModule('part2', curShape);
             }, 2000);
         });
 
@@ -99,6 +99,16 @@
             paint = false;
         });
 
+        var shapeDivList = [];
+        var select = function(shapeDiv) {
+            for(var i = 0; i < shapeDivList.length; i++) {
+                shapeDivList[i].css({"top": shapeTop});
+            }
+            shapeDiv.css({
+                "top": shapeTop + 20
+            });
+            curShape = shapeDiv.attr('shape');
+        };
         for (var i = 0; i < shapeList.length; i++) {
             var shape = shapeList[i];
 
@@ -106,7 +116,7 @@
             shapeDiv.attr('shape', shape);
             shapeDiv.css({
                 "position": "absolute",
-                "background-color": "#555555",
+                "background": "url('images/shape/"+shapeList[i]+".png') no-repeat",
                 "top": shapeTop,
                 "height": shapeHeight,
                 "width": shapeWidth,
@@ -116,12 +126,10 @@
             shapeDiv.click(function() {
                 select($(this)); 
             });
+            shapeDivList.push(shapeDiv);
         }
+        select(shapeDivList[0]);
     }
-
-    var select = function(shapeDiv) {
-        curShape = shapeDiv.attr('shape');
-    };
 
     function drawEllipse(ctx, x, y, w, h) {
         var kappa = .5522848;
