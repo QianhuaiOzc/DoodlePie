@@ -95,6 +95,7 @@
             repaint();
         });
 
+        save = $("#save");
         save.live("click", function () {
             game.fillFinished();
 
