@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+<canvas height="600px" width="800px" id="canvas" style="border:1px solid yellow"></canvas>
+
+
+<script type="text/javascript">
+
+
+		var canvas = document.querySelector("canvas");
+		var context = canvas.getContext("2d");
+		
+		// context.rect(0, 0, 100, 100);
+		// context.clip();
+		context.beginPath();
+		context.lineTo(0,0);
+		context.moveTo(0, 0);
+		context.lineTo(100, 200);
+		context.moveTo(0, 200);
+		context.lineTo(100, 0);
+		context.rect(0, 0, 100, 200);
+		context.stroke();
+		var imgd = context.getImageData(0,0, 100,200);
+		context.clearRect(0,0,100+1,200+1);
+		for (var i = 0; i < 8; i+=2) {
+			context.putImageData(imgd, 100*(i),0);
+			context.putImageData(imgd, 100*(i-1),200);
+			context.putImageData(imgd, 100*(i),400);
+		};
+		
+		
+
+		
+
+	</script>
+
+</body>
+</html>

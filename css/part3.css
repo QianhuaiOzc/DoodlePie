@@ -1,0 +1,112 @@
+#slider{
+	border:1px solid yellow;
+   	margin:auto;
+}
+
+#slider .content{
+	position:relative;
+	border:1px solid blue;
+	width:800px;
+	height:600px;
+	margin: auto;
+}
+#slider .con-left{
+	border-right:1px solid black;
+	width:580px;
+	height:600px;
+	float:left;
+
+}
+#slider .con-right{
+	
+	/*width:200px;*/
+	height:600px;
+    float:left;
+}
+#slider .con-right-top{
+	position: relative;
+	height:50px;
+}
+
+#slider .con-right-bottom{
+	
+position: relative;
+}
+
+
+#slider .part3-option{
+	height:30px;
+}
+
+.fromRight{
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-name: anim-fromRight;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear; 
+}
+@-webkit-keyframes anim-fromRight
+{
+    0%{
+    -webkit-transform: translate(500px, 0px); 
+
+} 
+100%{
+    -webkit-transform: translate(0px, 0px); 
+}
+}
+/*from left*/
+.fromLeft{
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-name: anim-fromLeft;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear; 
+}
+@-webkit-keyframes anim-fromLeft
+{
+    0%{
+    -webkit-transform: translate(-500px, 0px); 
+
+} 
+100%{
+    -webkit-transform: translate(0px, 0px); 
+}
+}
+/*from top*/
+.fromTop{
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-name: anim-fromTop;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear; 
+}
+@-webkit-keyframes anim-fromTop
+{
+    0%{
+    -webkit-transform: translate(0px, 500px); 
+
+} 
+100%{
+    -webkit-transform: translate(0px, 0px); 
+}
+}
+
+/*from bottom*/
+.fromBottom{
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-name: anim-fromBottom;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear; 
+}
+@-webkit-keyframes anim-fromBottom
+{
+    0%{
+    -webkit-transform: translate(0px, -500px); 
+
+} 
+100%{
+    -webkit-transform: translate(0px, 0px); 
+}
+}
