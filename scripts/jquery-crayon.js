@@ -30,7 +30,6 @@
 
         var select = function (divPen) {
             if (selectedDivPen) {
-                if (divPen.get() == selectedDivPen.get()) return;
                 selectedDivPen.css("left", penUnselectedLeft);
             }
 
