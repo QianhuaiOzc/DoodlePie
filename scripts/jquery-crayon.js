@@ -79,11 +79,12 @@
         var divUndo = $("<div></div>").appendTo(main);
         divUndo.css({
             position: "absolute",
-            width: 50,
-            height: 50,
-            border: "1px solid red",
+            width: 83,
+            height: 62,
+            // border: "1px solid red",
+            "background-image": "url(images/undo.png)",
             top: 700,
-            left: 220
+            left: 210
         });
 
         divUndo.click(options.undo);
@@ -92,11 +93,12 @@
         var divReset = $("<div></div>").appendTo(main);
         divReset.css({
             position: "absolute",
-            width: 50,
-            height: 50,
-            border: "1px solid red",
+            width: 83,
+            height: 62,
+            // border: "1px solid red",
+            "background-image": "url(images/reset.png)",
             top: 700,
-            left: 290
+            left: 298
         });
 
         divReset.click(options.reset);
