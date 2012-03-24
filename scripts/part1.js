@@ -6,7 +6,7 @@
     var paint = false;
     var startX;
     var startY;
-    var style;
+    var curColor;
     var shape;
 
 	function init() {
@@ -18,8 +18,6 @@
 		mainCanvas.css({
 			position: "absolute",
 			border: "1px solid red",
-			//width: 800,
-			//height: 600,
 			left: 200,
 			top: 20
 		});
@@ -29,17 +27,24 @@
             height: 600
         });
 
+        var colorSelected = function (color) {
+            curColor = color;
+        }
+
+        $.crayon({
+            main: main,
+            colorSelected: colorSelected
+        });
+
         context = mainCanvas[0].getContext('2d');
+        shape = 'rectangle';
 
         mainCanvas.mousedown(function(e) {
-            startX = e.layerX;
-            startY = e.layerY;
+            startX = e.offsetX;
+            startY = e.offsetY;
             //alert("x: " + startX + ", y:" + startY);
             paint = true;
-            style = '#FF0000';
-            shape = 'rectangle';
-            //shape = 'round';
-            //shape = 'triangle';
+            clearCanvas();
         });
 
         mainCanvas.mouseup(function(e) {
@@ -49,23 +54,16 @@
         mainCanvas.mousemove(function(e) {
             if(paint == true) {
                 clearCanvas();
-                //console.log("startX: " + startX + ", startY: " + startY + ",x: " + curX + ", y: " + curY);
+                context.strokeStyle = curColor;
+                var curX = e.offsetX;
+                var curY = e.offsetY;
                 if (shape == 'rectangle') {
-                    var width = e.layerX - startX;
-                    var height = e.layerY - startY;
+                    var width = curX - startX;
+                    var height = curY - startY;
                     context.strokeRect(startX, startY, width, height);
-                    context.strokeStyle = style;
                 } else if (shape == 'round') {
-                    var curX = e.layerX;
-                    var curY = e.layerY;
-                    var x = (curX - startX) / 2;
-                    var y = (curY - startY) / 2;
-                    context.beginPath();
-                    context.arc(x, y, x, 0, Math.PI * 2, true);
-                    context.closePath();
-                } else {
-                    var curX = e.layerX;
-                    var curY = e.layerY;
+                    drawEllipse(context, startX, startY, (curX - startX), (curY - startY));
+                } else if (shape == 'triangle') {
                     context.beginPath();
                     context.moveTo((curX + startX)/2, startY);
                     context.lineTo(curX, curY);
@@ -80,11 +78,40 @@
         mainCanvas.mouseleave(function(e) {
             paint = false;
         });
+
+	    function drawEllipse(ctx, x, y, w, h) {
+	        var kappa = .5522848;
+	        ox = (w / 2) * kappa, // control point offset horizontal
+	        oy = (h / 2) * kappa, // control point offset vertical
+	        xe = x + w,           // x-end
+	        ye = y + h,           // y-end
+	        xm = x + w / 2,       // x-middle
+	        ym = y + h / 2;       // y-middle
+
+	        ctx.beginPath();
+        	ctx.moveTo(x, ym);
+	        ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+	        ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+	        ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+	        ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+	        ctx.closePath();
+	        ctx.stroke();
+	    }
+
+        $('#triangle').click(function(e) {
+            shape = 'triangle';
+        });
+        $('#round').click(function(e) {
+            shape = 'round';
+        });
+        $('#rectangle').click(function(e) {
+            shape = 'rectangle';
+        });
 	}
 
     function clearCanvas() {
         context.fillStyle = '#ffffff';
-        context.fillRect(0, 0, 800, 600);
+        context.fillRect(0, 0, mainCanvas.attr("width"), mainCanvas.attr("height")); // Fill in the canvas with white
     }
 
 	function dispose() {
