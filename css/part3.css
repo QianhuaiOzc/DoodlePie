@@ -1,16 +1,18 @@
 #slider{
-	border:1px solid yellow;
+
    	margin:auto;
+    padding: 116px 0px 0px 94px;
 }
 
 #slider .content{
+    border:1px solid black;
 	position:relative;
-	border:1px solid blue;
 	width:800px;
 	height:600px;
 	margin: auto;
 }
 #slider .con-left{
+    position: relative;
 	border-right:1px solid black;
 	width:580px;
 	height:600px;
@@ -19,25 +21,37 @@
 }
 #slider .con-right{
 	
-	/*width:200px;*/
+	width:200px;
 	height:600px;
     float:left;
 }
 #slider .con-right-top{
 	position: relative;
-	height:50px;
+	height:250px;
 }
 
 #slider .con-right-bottom{
 	
-position: relative;
+    position: relative;
 }
-
+#slider table{
+    height:100%;
+    width:100%;
+}
+#slider table td{
+    vertical-align: middle;
+    text-align: center; 
+}
 
 #slider .part3-option{
 	height:30px;
 }
-
+#slider .toNextButton{
+    position: absolute;
+    display: block;
+    right:0;
+    bottom:0;
+}
 .fromRight{
     -webkit-transform-style: preserve-3d;
     -webkit-animation-name: anim-fromRight;
