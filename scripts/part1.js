@@ -63,6 +63,7 @@
         mainCanvas.mouseup(function(e) {
             paint = false;
             setTimeout(function() {
+                game.shapeUsed();
                 game.loadModule('part2');
             }, 2000);
         });
