@@ -37,6 +37,66 @@
     height: 200px;
 }
 
+#save {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    background-image: url(images/save.png);
+    left: 573px;
+    top: 682px;
+    width: 126px;
+    height: 86px;
+    display: none;
+}
+
+#guess {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    background-image: url(images/guess.png);
+    left: 600px;
+    top: 577px;
+    width: 110px;
+    height: 99px;
+    display: none;
+}
+
+#fill {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    background-image: url(images/fill.png);
+    left: 704px;
+    top: 518px;
+    width: 103px;
+    height: 105px;
+    display: none;
+}
+
+#blackboard {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    background-image: url(images/blackboard.png);
+    left: 803px;
+    top: 481px;
+    width: 110px;
+    height: 118px;
+    display: none;
+}
+
+#magic {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    background-image: url(images/magic.png);
+    left: 922px;
+    top: 503px;
+    width: 101px;
+    height: 100px;
+    display: none;
+}
+
 </style>
 
 <script>
@@ -50,10 +110,23 @@ var refreshLevel = function () {
     if (game.level == 1) {
         if (guessFinished && imagePainted >= 3 && shapesToUse.length <= 1) {
             game.level = 2;
+
+            $("#fill").removeClass("disable").click(function () {
+                toggleMenu();
+                game.loadModule("fill");
+            });
+
+            $("#blackboard").removeClass("disable").click(function () {
+                toggleMenu();
+            });
         }
     } else if (game.level == 2) {
         if (fillFinished && imagePainted >= 5 && shapesToUse.length <= 0) {
             game.level == 3;
+
+            $("#magic").removeClass("disable").click(function () {
+                toggleMenu();
+            });
         }
     }
 }
@@ -100,13 +173,26 @@ $(document).ready(function () {
     game.loadModule("fill");
 });
 
+var toggleMenu = function () {
+    $("#save").toggle();
+    $("#guess").toggle();
+    $("#fill").toggle();
+    $("#blackboard").toggle();
+    $("#magic").toggle();
+}
+
 </script>
 
 </head>
 <body>
     <div id="container">
         <div id="main"></div>
-        <div id="pie"></div>
+        <div id="save" onclick="toggleMenu()"></div>
+        <div id="guess" onclick="toggleMenu(); game.loadModule('part3');"></div>
+        <div id="fill" class="disable"></div>
+        <div id="blackboard" class="disable"></div>
+        <div id="magic" class="disable"></div>
+        <div id="pie" onclick="toggleMenu()"></div>
     </div>
 
     <script src="scripts/jquery-crayon.js"></script>
