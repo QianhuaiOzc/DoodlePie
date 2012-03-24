@@ -7,7 +7,10 @@
     var startX;
     var startY;
     var curColor;
-    var curShape;
+    var curShape = 'rectangle';
+    var curSize;
+    var crayonTextureImage = new Image();
+    crayonTextureImage.src = "images/crayon-texture.png"
 
     // shape list
     var shapeList = [ 'rectangle', 'triangle', 'round' ]; 
@@ -38,10 +41,14 @@
         var colorSelected = function (color) {
             curColor = color;
         };
+        var sizeSelected = function(size) {
+            curSize = size;
+        }
 
         $.crayon({
             main: main,
-            colorSelected: colorSelected
+            colorSelected: colorSelected,
+            sizeSelected: sizeSelected
         });
         context = mainCanvas[0].getContext('2d');
 
@@ -55,31 +62,35 @@
 
         mainCanvas.mouseup(function(e) {
             paint = false;
-            setTimeout(nextStep, 2000);
-            
+            setTimeout(function() {
+                game.loadModule('part2');
+            }, 2000);
         });
 
         mainCanvas.mousemove(function(e) {
             if(paint == true) {
-            clearCanvas();
-            context.strokeStyle = curColor;
-            var curX = e.offsetX;
-            var curY = e.offsetY;
-            if (curShape == 'rectangle') {
-            var width = curX - startX;
-            var height = curY - startY;
-            context.strokeRect(startX, startY, width, height);
-            } else if (curShape == 'round') {
-            drawEllipse(context, startX, startY, (curX - startX), (curY - startY));
-            } else if (curShape == 'triangle') {
-            context.beginPath();
-            context.moveTo((curX + startX)/2, startY);
-            context.lineTo(curX, curY);
-            context.lineTo(startX, curY);
-            context.closePath();
-            }
-            context.stroke();
-            context.restore();
+                clearCanvas();
+                context.strokeStyle = curColor;
+                context.lineWidth = curSize;
+                var curX = e.offsetX;
+                var curY = e.offsetY;
+                if (curShape == 'rectangle') {
+                    var width = curX - startX;
+                    var height = curY - startY;
+                    context.strokeRect(startX, startY, curX - startX, curY - startY);
+                } else if (curShape == 'round') {
+                    drawEllipse(context, startX, startY, (curX - startX), (curY - startY));
+                } else if (curShape == 'triangle') {
+                    context.beginPath();
+                    context.moveTo((curX + startX)/2, startY);
+                    context.lineTo(curX, curY);
+                    context.lineTo(startX, curY);
+                    context.closePath();
+                }
+                context.stroke();
+                context.restore();
+                context.globalAlpha = 0.5;
+                context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
             }
         });
 
@@ -110,15 +121,6 @@
     var select = function(shapeDiv) {
         curShape = shapeDiv.attr('shape');
     };
-
-    function nextStep() {
-        clearCanvas();
-        var image = new Image();
-        image.src = 'images/fill-background.png';
-        context.drawImage(image, 0, 0);
-        //context.globalAlpha = 0.1;
-        game.loadModule('part2');
-    }
 
     function drawEllipse(ctx, x, y, w, h) {
         var kappa = .5522848;
