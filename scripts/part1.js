@@ -55,7 +55,6 @@
         mainCanvas.mousedown(function(e) {
             startX = e.offsetX;
             startY = e.offsetY;
-            //alert("x: " + startX + ", y:" + startY);
             paint = true;
             clearCanvas();
         });

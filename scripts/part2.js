@@ -3,8 +3,6 @@
     var main;
     var save;
 
-    var stampsList = [ "ball", "flower", "heart", "music", "star" ];
-
     function init() {
         main = $("#main");
         main.empty();
