@@ -140,7 +140,7 @@
 
         save = $("#save");
         save.live("click", function () {
-            game.fillFinished();
+            game.imagePainted();
 
             try {
                 var dataUrl = canvas.toDataURL("image/png");
@@ -178,7 +178,7 @@
                 }
             }
 
-            context.globalAlpha = 0.5;
+            context.globalAlpha = 0.4;
             context.drawImage(strokeImg, 0, 0);
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
             
