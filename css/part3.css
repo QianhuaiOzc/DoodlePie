@@ -1,11 +1,12 @@
 #slider{
 
    	margin:auto;
-    padding: 116px 0px 0px 94px;
+    padding: 61px 0px 0px 0px;
+     height:100%;
+    width:100%;
 }
 
 #slider .content{
-    border:1px solid black;
 	position:relative;
 	width:800px;
 	height:600px;
@@ -13,21 +14,20 @@
 }
 #slider .con-left{
     position: relative;
-	border-right:1px solid black;
-	width:580px;
+	width:500px;
 	height:600px;
 	float:left;
 
 }
 #slider .con-right{
 	
-	width:200px;
+	width:300px;
 	height:600px;
     float:left;
 }
 #slider .con-right-top{
 	position: relative;
-	height:250px;
+	/*height:250px;*/
 }
 
 #slider .con-right-bottom{
@@ -41,16 +41,52 @@
 #slider table td{
     vertical-align: middle;
     text-align: center; 
+   
+
 }
 
 #slider .part3-option{
-	height:30px;
+	height:90px;
+    cursor: pointer;
+     list-style: none;
 }
 #slider .toNextButton{
     position: absolute;
     display: block;
+    background-image: url(../images/guess/next.png);
+    height:84px;
+    width:87px;
     right:0;
     bottom:0;
+    cursor: pointer;
+}
+#slider .toNextButton:hover{
+
+background-image: url(../images/guess/next_s.png);
+}
+
+#slider .score{
+    position: absolute;
+    bottom:0;
+    left:0;
+}
+#slider .wrong{
+    position: absolute;
+    background-image: url(../images/guess/wrong.png);
+    height:186px;
+    width:307px;
+    bottom:120px;
+    right:100px;
+
+}
+#slider .right{
+    position: absolute;
+    background-image: url(../images/guess/right.png);
+    height:186px;
+    width:307px;
+    bottom:140px;
+    right:100px;
+
 }
 .fromRight{
     -webkit-transform-style: preserve-3d;
