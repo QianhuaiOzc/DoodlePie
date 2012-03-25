@@ -69,8 +69,8 @@
                 clearCanvas();
                 context.drawImage(img, 0, 0);
             }, 2000);
-            setTimeout(function(curShape) {
-                game.shapeUsed();
+            setTimeout(function() {
+                game.shapeUsed(curShape);
                 game.loadModule('part2', showImg+".png");
             }, 4000);
         });
