@@ -113,8 +113,17 @@
     display: none;
 }
 
-#magic.disable {
+#magic.disabl5{
     background-image: url(images/menu/magic_disable.png);
+}
+
+#home {
+    /* border: 1px solid red; */
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: 915px;
+    top: 5px;
 }
 
 </style>
@@ -213,6 +222,7 @@ var toggleMenu = function () {
         <div id="blackboard" class="disable"></div>
         <div id="magic" class="disable"></div>
         <div id="pie" onclick="toggleMenu()"></div>
+        <div id="home" onclick="game.loadModule('part1');"></div>
     </div>
 
     <script src="scripts/jquery-crayon.js"></script>
