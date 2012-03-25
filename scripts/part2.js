@@ -3,8 +3,6 @@
     var main;
     var save;
 
-    var stampsList = [ "ball", "flower", "heart", "music", "star" ];
-
     function init() {
         main = $("#main");
         main.empty();
@@ -169,7 +167,7 @@
                 } else {
                     var stampImg = new Image();
                     stampImg.src = "images/stamps/"+path.stamp+"1.png";
-                    context.drawImage(stampImg, path.x, path.y);
+                    context.drawImage(stampImg, path.x - stampImg.width / 2, path.y - stampImg.height/2);
                 }
             }
 
