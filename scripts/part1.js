@@ -13,7 +13,7 @@
     crayonTextureImage.src = "images/crayon-texture.png"
 
     // shape list
-    var shapeList = [ 'rectangle', 'triangle', 'round' ]; 
+    var shapeList = [ 'rectangle', 'triangle', 'circle' ]; 
     var shapeTop = -15;
     var shapeFirstLeft = 320;
     var shapeSpacing = 50;
@@ -69,7 +69,7 @@
                 clearCanvas();
                 context.drawImage(img, 0, 0);
             }, 2000);
-            setTimeout(function() {
+            setTimeout(function(curShape) {
                 game.shapeUsed();
                 game.loadModule('part2', showImg+".png");
             }, 4000);
@@ -86,7 +86,7 @@
                     var width = curX - startX;
                     var height = curY - startY;
                     context.strokeRect(startX, startY, curX - startX, curY - startY);
-                } else if (curShape == 'round') {
+                } else if (curShape == 'circle') {
                     drawEllipse(context, startX, startY, (curX - startX), (curY - startY));
                 } else if (curShape == 'triangle') {
                     context.beginPath();
@@ -96,7 +96,7 @@
                     context.closePath();
                 }
                 context.stroke();
-                context.restore();
+                //context.restore();
                 context.globalAlpha = 0.5;
                 context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
             }

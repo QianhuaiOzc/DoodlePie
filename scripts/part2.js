@@ -2,6 +2,8 @@
 
     var main;
     var save;
+    var imgs = [];
+    var stampsList = [ "ball", "flower", "heart", "music", "star" ];
 
     function init() {
         main = $("#main");
@@ -12,6 +14,12 @@
         var strokeImg = new Image();
         strokeImg.src = showImg;
 
+        for(var i = 0; i < stampsList.length; i++) {
+            var img = new Image();
+            var imgPath = stampsList[i];
+            img.src = "images/stamps/"+stampsList[i]+"1.png";
+            imgs[imgPath] = img;
+        }
         // canvas
         var mainCanvas = $("<canvas></canvas>").appendTo(main);
         mainCanvas.css({
@@ -165,8 +173,7 @@
                     context.stroke();
                     context.closePath();
                 } else {
-                    var stampImg = new Image();
-                    stampImg.src = "images/stamps/"+path.stamp+"1.png";
+                    var stampImg = imgs[path.stamp];
                     context.drawImage(stampImg, path.x - stampImg.width / 2, path.y - stampImg.height/2);
                 }
             }
