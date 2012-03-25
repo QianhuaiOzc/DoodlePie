@@ -14,7 +14,7 @@
 
     // shape list
     var shapeList = [ 'rectangle', 'triangle', 'round' ]; 
-    var shapeTop = 0;
+    var shapeTop = -15;
     var shapeFirstLeft = 320;
     var shapeSpacing = 50;
     var shapeHeight = 117;
@@ -73,7 +73,7 @@
             setTimeout(function() {
                 game.shapeUsed();
                 game.loadModule('part2', showImg+".png");
-            }, 6000);
+            }, 4000);
         });
 
         mainCanvas.mousemove(function(e) {
@@ -113,7 +113,7 @@
                 shapeDivList[i].css({"top": shapeTop});
             }
             shapeDiv.css({
-                "top": shapeTop + 20
+                "top": shapeTop + 30 
             });
             curShape = shapeDiv.attr('shape');
         };

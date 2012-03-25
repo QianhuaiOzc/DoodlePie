@@ -36,6 +36,7 @@
 
         var currColor;
         var currSize;
+        var currStamp;
         var drawing = false;
 
         var pathes = [];
@@ -70,7 +71,11 @@
             reset: reset
         });
 
-        $.stamp({main: main});
+        var stampSelected = function(stamp) {
+            currStamp = stamp;
+        }
+        $.stamp({main: main, stampSelected: stampSelected});
+
         mainCanvas.mousedown(function (ev) {
             drawing = true;
 
