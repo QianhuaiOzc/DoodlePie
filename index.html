@@ -115,7 +115,7 @@
     display: none;
 }
 
-#magic.disabl5{
+#magic.disable {
     background-image: url(images/menu/magic_disable.png);
 }
 
@@ -177,7 +177,7 @@ var game = {
     shapeUsed: function (name) {
         var index = shapesToUse.indexOf(name);
         if (index >= 0) {
-            shapesToUse.slice(index, 1);
+            shapesToUse.splice(index, 1);
             refreshLevel();
         }
     },
