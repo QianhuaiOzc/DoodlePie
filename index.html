@@ -7,7 +7,7 @@
 <script src="scripts/jquery-1.5.1.min.js"></script>
 <script src="scripts/jcanvas.min.js"></script>
 <script src="scripts/game.js"></script>
-<script src="scripts/jquery.popImage.min.js"></script>
+<script src="scripts/jquery.popImage.mini.js"></script>
 <link rel="stylesheet" type="text/css" href="css/part3.css" />
 <link rel="stylesheet" type="text/css" href="css/popImage.css" />
 <style>
@@ -220,7 +220,7 @@ var toggleMenu = function () {
         <div id="main"></div>
         <div id="save" onclick="toggleMenu()"></div>
         <div id="guess" onclick="toggleMenu(); game.loadModule('part3');"></div>
-        <div id="fill" class="disable"></div>
+        <div id="fill" class="disable" title='images/fill-background.png'></div>
         <div id="blackboard" class="disable"></div>
         <div id="magic" class="disable"></div>
         <div id="pie" onclick="toggleMenu()"></div>
@@ -234,5 +234,10 @@ var toggleMenu = function () {
     <script src="scripts/part2.js"></script>
     <script src="scripts/part3.js"></script>
     <script src="scripts/fill.js"></script>
+    <script>
+        $(function() {
+            $("#fill").popImage({"tagName": "title"});
+        });
+    </script>
 </body>
 </html>
