@@ -10,6 +10,8 @@
 <script src="scripts/jquery.popImage.mini.js"></script>
 <link rel="stylesheet" type="text/css" href="css/part3.css" />
 <link rel="stylesheet" type="text/css" href="css/popImage.css" />
+<script type="text/javascript" src="scripts/jquery.lightbox-0.5.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen" />
 <style>
 
 #container {
@@ -220,7 +222,7 @@ var toggleMenu = function () {
         <div id="main"></div>
         <div id="save" onclick="toggleMenu()"></div>
         <div id="guess" onclick="toggleMenu(); game.loadModule('part3');"></div>
-        <div id="fill" class="disable" title='images/fill-background.png'></div>
+        <div id="fill" class="disable" href='images/fill-background.png'></div>
         <div id="blackboard" class="disable"></div>
         <div id="magic" class="disable"></div>
         <div id="pie" onclick="toggleMenu()"></div>
@@ -236,7 +238,7 @@ var toggleMenu = function () {
     <script src="scripts/fill.js"></script>
     <script>
         $(function() {
-            $("#fill").popImage({"tagName": "title"});
+            $("#fill").lightBox();
         });
     </script>
 </body>
