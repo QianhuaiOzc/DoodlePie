@@ -2,7 +2,7 @@
 
     var main;
     var save;
-
+    var imgs = [];
     var stampsList = [ "ball", "flower", "heart", "music", "star" ];
 
     function init() {
@@ -14,6 +14,12 @@
         var strokeImg = new Image();
         strokeImg.src = showImg;
 
+        for(var i = 0; i < stampsList.length; i++) {
+            var img = new Image();
+            var imgPath = stampsList[i];
+            img.src = "images/stamps/"+stampsList[i]+"1.png";
+            imgs[imgPath] = img;
+        }
         // canvas
         var mainCanvas = $("<canvas></canvas>").appendTo(main);
         mainCanvas.css({
@@ -36,6 +42,7 @@
 
         var currColor;
         var currSize;
+        var currStamp;
         var drawing = false;
 
         var pathes = [];
@@ -70,7 +77,31 @@
             reset: reset
         });
 
+        var stampSelected = function(stamp) {
+            currStamp = stamp;
+        }
+        $.stamp({main: main, stampSelected: stampSelected});
+
         mainCanvas.mousedown(function (ev) {
+            if(currStamp != null) {
+                pathes.push({
+                    stamp: currStamp,
+                    x: ev.offsetX,
+                    y: ev.offsetY
+                });
+            } else {
+                drawing = true;
+                currPath = {
+                    color: currColor,
+                    size: currSize,
+                    points: [ {
+                        x: ev.offsetX,
+                        y: ev.offsetY
+                    } ]
+                };
+                pathes.push(currPath);
+            }
+            /*
             drawing = true;
 
             currPath = {
@@ -82,13 +113,18 @@
                 } ]
             };
 
-            pathes.push(currPath);
+            if(currStamp != null) {
+                currPath.stamp = currStamp;
+            }
 
+            pathes.push(currPath);
+            */
             repaint();
         });
 
         mainCanvas.mouseup(function (ev) {
             drawing = false;
+            repaint();
         });
 
         mainCanvas.mousemove(function (ev) {
@@ -104,7 +140,7 @@
 
         save = $("#save");
         save.live("click", function () {
-            game.fillFinished();
+            game.imagePainted();
 
             try {
                 var dataUrl = canvas.toDataURL("image/png");
@@ -121,28 +157,35 @@
 
             for (var i = 0; i < pathes.length; i++) {
                 var path = pathes[i];
+                if(!path.stamp) {
 
-                context.beginPath();
-                context.strokeStyle = "#" + path.color;
-                context.lineWidth = path.size;
-                context.lineJoin = "round";
+                    context.beginPath();
+                    context.strokeStyle = "#" + path.color;
+                    context.lineWidth = path.size;
+                    context.lineJoin = "round";
 
-                context.moveTo(path.points[0].x, path.points[0].y);
+                    context.moveTo(path.points[0].x, path.points[0].y);
 
-                for (var j = 1; j < path.points.length; j++) {
-                    context.lineTo(path.points[j].x, path.points[j].y);
+                    for (var j = 1; j < path.points.length; j++) {
+                        context.lineTo(path.points[j].x, path.points[j].y);
+                    }
+
+                    context.stroke();
+                    context.closePath();
+                } else {
+                    var stampImg = imgs[path.stamp];
+                    context.drawImage(stampImg, path.x - stampImg.width / 2, path.y - stampImg.height/2);
                 }
-
-                context.stroke();
-                context.closePath();
             }
 
-            context.globalAlpha = 0.5;
+            context.globalAlpha = 0.4;
             context.drawImage(strokeImg, 0, 0);
             context.drawImage(crayonTextureImage, 0, 0, crayonTextureImage.width, crayonTextureImage.height);
             
             context.globalAlpha = 1;
         }
+
+        window.setTimeout(repaint, 100);
     }
 
     function dispose() {

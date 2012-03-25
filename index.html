@@ -7,7 +7,9 @@
 <script src="scripts/jquery-1.5.1.min.js"></script>
 <script src="scripts/jcanvas.min.js"></script>
 <script src="scripts/game.js"></script>
+<script src="scripts/jquery.popImage.mini.js"></script>
 <link rel="stylesheet" type="text/css" href="css/part3.css" />
+<link rel="stylesheet" type="text/css" href="css/popImage.css" />
 <style>
 
 #container {
@@ -40,8 +42,8 @@
 #save {
     z-index: 1000;
     position: absolute;
-    border: 1px solid red;
-    background-image: url(images/save.png);
+    /* border: 1px solid red; */
+    background-image: url(images/menu/save.png);
     left: 573px;
     top: 682px;
     width: 126px;
@@ -49,11 +51,15 @@
     display: none;
 }
 
+#save.disable {
+    background-image: url(images/menu/save_disable.png);
+}
+
 #guess {
     z-index: 1000;
     position: absolute;
-    border: 1px solid red;
-    background-image: url(images/guess.png);
+    /* border: 1px solid red; */
+    background-image: url(images/menu/guess.png);
     left: 600px;
     top: 577px;
     width: 110px;
@@ -61,11 +67,15 @@
     display: none;
 }
 
+#guess.disable {
+    background-image: url(images/menu/guess_disable.png);
+}
+
 #fill {
     z-index: 1000;
     position: absolute;
-    border: 1px solid red;
-    background-image: url(images/fill.png);
+    /* border: 1px solid red; */
+    background-image: url(images/menu/fill.png);
     left: 704px;
     top: 518px;
     width: 103px;
@@ -73,11 +83,15 @@
     display: none;
 }
 
+#fill.disable {
+    background-image: url(images/menu/fill_disable.png);
+}
+
 #blackboard {
     z-index: 1000;
     position: absolute;
-    border: 1px solid red;
-    background-image: url(images/blackboard.png);
+    /* border: 1px solid red; */
+    background-image: url(images/menu/blackboard.png);
     left: 803px;
     top: 481px;
     width: 110px;
@@ -85,11 +99,15 @@
     display: none;
 }
 
+#blackboard.disable {
+    background-image: url(images/menu/blackboard_disable.png);
+}
+
 #magic {
     z-index: 1000;
     position: absolute;
-    border: 1px solid red;
-    background-image: url(images/magic.png);
+    /* border: 1px solid red; */
+    background-image: url(images/menu/magic.png);
     left: 922px;
     top: 503px;
     width: 101px;
@@ -97,11 +115,24 @@
     display: none;
 }
 
+#magic.disable {
+    background-image: url(images/menu/magic_disable.png);
+}
+
+#home {
+    /* border: 1px solid red; */
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: 915px;
+    top: 5px;
+}
+
 </style>
 
 <script>
 
-var shapesToUse = [ "square", "rectangle", "circle" ];
+var shapesToUse = [ "triangle", "rectangle", "circle" ];
 var imagePainted = 0;
 var guessFinished = false;
 var fillFinished = false;
@@ -134,19 +165,19 @@ var refreshLevel = function () {
 var game = {
     level: 1,
 
-    loadModule: function (name) {
+    loadModule: function (name, args) {
         if (this._currModule) {
             this._currModule.dispose();
         }
 
         this._currModule = modules[name];
-        this._currModule.init();
+        this._currModule.init(args);
     },
 
     shapeUsed: function (name) {
         var index = shapesToUse.indexOf(name);
         if (index >= 0) {
-            shapesToUse.slice(index, 1);
+            shapesToUse.splice(index, 1);
             refreshLevel();
         }
     },
@@ -170,7 +201,11 @@ var game = {
 var modules = { };
 
 $(document).ready(function () {
+<<<<<<< HEAD
     game.loadModule("part3");
+=======
+    game.loadModule("part1");
+>>>>>>> 50ab398f846828ff580e983271f368c2b14a94cb
 });
 
 var toggleMenu = function () {
@@ -189,17 +224,24 @@ var toggleMenu = function () {
         <div id="main"></div>
         <div id="save" onclick="toggleMenu()"></div>
         <div id="guess" onclick="toggleMenu(); game.loadModule('part3');"></div>
-        <div id="fill" class="disable"></div>
+        <div id="fill" class="disable" title='images/fill-background.png'></div>
         <div id="blackboard" class="disable"></div>
         <div id="magic" class="disable"></div>
         <div id="pie" onclick="toggleMenu()"></div>
+        <div id="home" onclick="game.loadModule('part1');"></div>
     </div>
 
     <script src="scripts/jquery-crayon.js"></script>
+    <script src="scripts/jquery-stamps.js"></script>
 
     <script src="scripts/part1.js"></script>
     <script src="scripts/part2.js"></script>
     <script src="scripts/part3.js"></script>
     <script src="scripts/fill.js"></script>
+    <script>
+        $(function() {
+            $("#fill").popImage({"tagName": "title"});
+        });
+    </script>
 </body>
 </html>

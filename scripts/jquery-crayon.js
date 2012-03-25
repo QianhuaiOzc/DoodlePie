@@ -1,7 +1,7 @@
 (function ($) {
 
     var colorList = [
-        "f1009c",
+        "ffcd9a",
         "fc0400",
         "ff852e",
         "fec900",
