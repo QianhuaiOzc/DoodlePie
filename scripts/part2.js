@@ -184,6 +184,8 @@
             
             context.globalAlpha = 1;
         }
+
+        window.setTimeout(repaint, 100);
     }
 
     function dispose() {
