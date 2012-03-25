@@ -70,6 +70,7 @@
             reset: reset
         });
 
+        $.stamp({main: main});
         mainCanvas.mousedown(function (ev) {
             drawing = true;
 
