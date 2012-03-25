@@ -7,7 +7,7 @@
     var startX;
     var startY;
     var curColor;
-    var curShape;
+    var curShape = 'rectangle';
     var curSize;
     var crayonTextureImage = new Image();
     crayonTextureImage.src = "images/crayon-texture.png"
@@ -15,10 +15,10 @@
     // shape list
     var shapeList = [ 'rectangle', 'triangle', 'round' ]; 
     var shapeTop = 0;
-    var shapeFirstLeft = 320;
+    var shapeFirstLeft = 450;
     var shapeSpacing = 50;
-    var shapeHeight = 117;
-    var shapeWidth = 117;
+    var shapeHeight = 100;
+    var shapeWidth = 100;
 
     function init() {
         main = $("#main");
@@ -62,18 +62,10 @@
 
         mainCanvas.mouseup(function(e) {
             paint = false;
-            var showImg = "images/" + curShape + "/" + Math.ceil(Math.random() * 3);
-            var showImgColor = showImg + "-color.png";
-            var img = new Image();
-            img.src = showImgColor;
-            setTimeout(function() {
-                clearCanvas();
-                context.drawImage(img, 0, 0);
-            }, 2000);
             setTimeout(function() {
                 game.shapeUsed();
-                game.loadModule('part2', showImg+".png");
-            }, 6000);
+                game.loadModule('part2');
+            }, 2000);
         });
 
         mainCanvas.mousemove(function(e) {
@@ -107,16 +99,6 @@
             paint = false;
         });
 
-        var shapeDivList = [];
-        var select = function(shapeDiv) {
-            for(var i = 0; i < shapeDivList.length; i++) {
-                shapeDivList[i].css({"top": shapeTop});
-            }
-            shapeDiv.css({
-                "top": shapeTop + 20
-            });
-            curShape = shapeDiv.attr('shape');
-        };
         for (var i = 0; i < shapeList.length; i++) {
             var shape = shapeList[i];
 
@@ -124,7 +106,7 @@
             shapeDiv.attr('shape', shape);
             shapeDiv.css({
                 "position": "absolute",
-                "background": "url('images/shape/"+shapeList[i]+".png') no-repeat",
+                "background-color": "#555555",
                 "top": shapeTop,
                 "height": shapeHeight,
                 "width": shapeWidth,
@@ -134,10 +116,12 @@
             shapeDiv.click(function() {
                 select($(this)); 
             });
-            shapeDivList.push(shapeDiv);
         }
-        select(shapeDivList[0]);
     }
+
+    var select = function(shapeDiv) {
+        curShape = shapeDiv.attr('shape');
+    };
 
     function drawEllipse(ctx, x, y, w, h) {
         var kappa = .5522848;
