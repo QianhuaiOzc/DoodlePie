@@ -77,6 +77,25 @@
         $.stamp({main: main, stampSelected: stampSelected});
 
         mainCanvas.mousedown(function (ev) {
+            if(currStamp != null) {
+                pathes.push({
+                    stamp: currStamp,
+                    x: ev.offsetX,
+                    y: ev.offsetY
+                });
+            } else {
+                drawing = true;
+                currPath = {
+                    color: currColor,
+                    size: currSize,
+                    points: [ {
+                        x: ev.offsetX,
+                        y: ev.offsetY
+                    } ]
+                };
+                pathes.push(currPath);
+            }
+            /*
             drawing = true;
 
             currPath = {
@@ -88,13 +107,18 @@
                 } ]
             };
 
-            pathes.push(currPath);
+            if(currStamp != null) {
+                currPath.stamp = currStamp;
+            }
 
+            pathes.push(currPath);
+            */
             repaint();
         });
 
         mainCanvas.mouseup(function (ev) {
             drawing = false;
+            repaint();
         });
 
         mainCanvas.mousemove(function (ev) {
@@ -127,20 +151,26 @@
 
             for (var i = 0; i < pathes.length; i++) {
                 var path = pathes[i];
+                if(!path.stamp) {
 
-                context.beginPath();
-                context.strokeStyle = "#" + path.color;
-                context.lineWidth = path.size;
-                context.lineJoin = "round";
+                    context.beginPath();
+                    context.strokeStyle = "#" + path.color;
+                    context.lineWidth = path.size;
+                    context.lineJoin = "round";
 
-                context.moveTo(path.points[0].x, path.points[0].y);
+                    context.moveTo(path.points[0].x, path.points[0].y);
 
-                for (var j = 1; j < path.points.length; j++) {
-                    context.lineTo(path.points[j].x, path.points[j].y);
+                    for (var j = 1; j < path.points.length; j++) {
+                        context.lineTo(path.points[j].x, path.points[j].y);
+                    }
+
+                    context.stroke();
+                    context.closePath();
+                } else {
+                    var stampImg = new Image();
+                    stampImg.src = "images/stamps/"+path.stamp+"1.png";
+                    context.drawImage(stampImg, path.x, path.y);
                 }
-
-                context.stroke();
-                context.closePath();
             }
 
             context.globalAlpha = 0.5;
