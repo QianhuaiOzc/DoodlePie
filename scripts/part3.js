@@ -70,6 +70,8 @@
 		];
 
 		main = document.querySelector("#main");
+		$(main).empty();
+
 		slider = document.createElement("div");
 		content = document.createElement("div");
 		conLeft = document.createElement("div");
@@ -160,7 +162,8 @@
 		toNextQuestion:function(){
 			if(!isAnswer) return;
 			if(curQuestion>=questions.length-1){
-				alert("finish");
+				game.guessFinished();
+				game.loadModule("part1");
 				return;
 			}
 			isAnswer = false;
