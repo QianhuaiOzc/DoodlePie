@@ -169,7 +169,7 @@
                 } else {
                     var stampImg = new Image();
                     stampImg.src = "images/stamps/"+path.stamp+"1.png";
-                    context.drawImage(stampImg, path.x, path.y);
+                    context.drawImage(stampImg, path.x - stampImg.width / 2, path.y - stampImg.height/2);
                 }
             }
 
